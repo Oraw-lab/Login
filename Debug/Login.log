@@ -1,8 +1,2 @@
-﻿  NormalAccount.cpp
-  login.cpp
-C:\Users\user\source\repos\Login\Login\login.cpp(17,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\user\source\repos\Login\Login\login.cpp(23,17): warning C4101: 'type': unreferenced local variable
-C:\Users\user\source\repos\Login\Login\login.cpp(40,28): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-  Generating Code...
+﻿  login.cpp
   Login.vcxproj -> C:\Users\user\source\repos\Login\Debug\Login.exe
