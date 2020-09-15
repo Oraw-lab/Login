@@ -1,10 +1,11 @@
 #include <iostream>
 #include "login.h"
 #include "NormalAccount.h"
+#include "Config.h"
 using namespace std;
 
 int main() {
-	Login myLogin = Login("C:\\Users\\user\\Desktop\\account\\test.txt");
+	Login myLogin = Login(accountFile);
 	account myAccount{};
 	cout << " What is the username ? ";
 	cin >> myAccount.accountName;

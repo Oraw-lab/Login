@@ -180,8 +180,10 @@ void Login::createAccount(accountType account) {
 	cin >> accountName;
 	cout << "Please eneter account password : ";
 	cin >> accountPassword;
-	// premissions for now is normal user
-	string premissions = "1";
+	// creating premissons for user
+	string premissions{};
+	cout << "What user permissons we want 1 = normal user , 0 = admin ";
+	cin >> premissions;
 	// formatting the string to fit for file
 	string toAppend = "\n" + accountName + " " + accountPassword + " " + premissions;
 	// writing to file

@@ -140,11 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AccountObjects.h" />
+    <ClInclude Include="Encryption.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="login.h" />
     <ClInclude Include="Malwares.h" />
     <ClInclude Include="NormalAccount.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Encryption.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Malwares.cpp" />

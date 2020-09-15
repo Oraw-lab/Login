@@ -4,10 +4,11 @@
 #include <map>
 #include "AccountObjects.h"
 #include "NormalAccount.h"
+#include "Encryption.h"
 using namespace std;
 
 
-class Login{
+class Login : public Encryption{
 	// accountFile - all passwords and user names
 	string accountFile{};
 	// map for authenticate

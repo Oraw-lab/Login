@@ -1,2 +1,10 @@
-﻿  login.cpp
-  Login.vcxproj -> C:\Users\user\source\repos\Login\Debug\Login.exe
+﻿main.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > accountFile" (?accountFile@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+main.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > malwareFileString" (?malwareFileString@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+main.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > placedFiles" (?placedFiles@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+Malwares.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > accountFile" (?accountFile@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+Malwares.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > malwareFileString" (?malwareFileString@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+Malwares.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > placedFiles" (?placedFiles@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+NormalAccount.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > accountFile" (?accountFile@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+NormalAccount.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > malwareFileString" (?malwareFileString@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+NormalAccount.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > placedFiles" (?placedFiles@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) already defined in login.obj
+C:\Users\user\source\repos\Login\Debug\Login.exe : fatal error LNK1169: one or more multiply defined symbols found
