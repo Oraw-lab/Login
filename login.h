@@ -4,11 +4,10 @@
 #include <map>
 #include "AccountObjects.h"
 #include "NormalAccount.h"
-#include "Encryption.h"
 using namespace std;
 
 
-class Login : public Encryption{
+class Login{
 	// accountFile - all passwords and user names
 	string accountFile{};
 	// map for authenticate
@@ -21,7 +20,7 @@ public:
 	// user log on
 	int logon(const account accountTry);
 	// creating account
-	void createAccount(accountType account);
+	void createAccount(accountType account, bool firstTime);
 
 private:
 	// not implement yet

@@ -3,23 +3,6 @@
 #include <string>
 #include <fstream>
 
-/*
-arugs = int premissions - determines if account admin or not
-design - create object NormalAccount.
-*/
-NormalAccount::NormalAccount(int premissions){
-	if (premissions) {
-		// Account is admin
-		isAdmin = true;
-		myPressions = accountType::administrator;
-	}
-	else {
-		// Account is not admin
-		isAdmin = false;
-		myPressions = accountType::normalUser;
-	}
-
-}
 
 /*
 arugs = AccountType - returning string of the premissions
@@ -41,6 +24,16 @@ string NormalAccount::accountTypeToString(accountType premissions)
 	default:
 		return "normalUser";
 	}
+}
+int NormalAccount::checkDir()
+{
+	struct stat info;
+	if (stat(usersFolder.c_str(), &info) != 0)
+		return 0;
+	else if (info.st_mode & S_IFDIR)
+		return 1;
+	else
+		return 0;
 }
 /*
 arugs = void

@@ -42,7 +42,8 @@ void Login::loadAccounts() {
 					try {
 						// calling gettingAccountType to get premissions, converting from string to int since gettingAccountType expects int.
 						premissions = gettingAccountType(stoi(tempPremissions));
-					}catch(int){
+					}
+					catch (int) {
 						// catching int type from gettingAccountType = unknown premissions
 						cout << "unknown account type" << endl;
 					}
@@ -52,14 +53,25 @@ void Login::loadAccounts() {
 				// adding the char to account
 				account += line[i];
 			}
-		// inserting to allAccount (hash map) syntax of map is string, pair(string,accountType)
-		// creating a pair and inserting
-		allAccount.insert({ account , make_pair(password,premissions) });
-		// initalizing all variable to NULL
-		account = {}, password = {}, tempPremissions = {};
-		premissions = accountType::notDef;
+			// inserting to allAccount (hash map) syntax of map is string, pair(string,accountType)
+			// creating a pair and inserting
+			allAccount.insert({ account , make_pair(password,premissions) });
+			// initalizing all variable to NULL
+			account = {}, password = {}, tempPremissions = {};
+			premissions = accountType::notDef;
 		}
 
+	}
+	// we didnt find a file in path, creating new file
+	else {
+		// creating file
+		ofstream outfile(accountFile);
+		cout << " No init account " << endl;
+		cout << " Please create a new account" << endl;
+		// creating adminsitrator account
+		createAccount(accountType::administrator, true);
+		// loading map with new account 
+		loadAccounts();
 	}
 
 }
@@ -162,11 +174,11 @@ int Login::logon(account accountTry)
 	exit (EXIT_FAILURE);
 }
 /*
-arugs = accountType - to get user premissions
+arugs = accountType - to get user premissions, bool firstTime - making sure there will be at least 1 administrator account
 design = creating another user to log in
 return = None, changing login file
 */
-void Login::createAccount(accountType account) {
+void Login::createAccount(accountType account, bool firstTime) {
 	// if user is not administrator breaking func
 	// normal user cant create user account
 	if (account != accountType::administrator) {
@@ -182,8 +194,15 @@ void Login::createAccount(accountType account) {
 	cin >> accountPassword;
 	// creating premissons for user
 	string premissions{};
-	cout << "What user permissons we want 1 = normal user , 0 = admin ";
-	cin >> premissions;
+	// first time we create a user , always will be admin
+	if(firstTime){
+		premissions = "0";
+	}
+	else {
+		// letting administrator to choose user premissions
+		cout << "What user permissons we want 1 = normal user , 0 = admin ";
+		cin >> premissions;
+	}
 	// formatting the string to fit for file
 	string toAppend = "\n" + accountName + " " + accountPassword + " " + premissions;
 	// writing to file

@@ -147,6 +147,7 @@
     <ClInclude Include="NormalAccount.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Encryption.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />

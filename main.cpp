@@ -4,18 +4,18 @@
 #include "Config.h"
 using namespace std;
 
+
+
 int main() {
-	Login myLogin = Login(accountFile);
+	Config myConfig = Config();
+	Login myLogin = Login(myConfig.accountFile);
 	account myAccount{};
 	cout << " What is the username ? ";
 	cin >> myAccount.accountName;
 	cout << " What is the password ? ";
 	cin >> myAccount.accountPassword;
-	NormalAccount userLoggedOn = NULL;
-	if (myLogin.logon(myAccount)) 
-		 userLoggedOn = NormalAccount(0);
-	else 
-		userLoggedOn = NormalAccount(1);
+	int premissions = myLogin.logon(myAccount);
+	NormalAccount userLoggedOn = NormalAccount(premissions, myConfig.malwareFileString, myConfig.placedFiles);
 	bool termination = false;
 	do {
 		int myChoice = NULL;
@@ -27,7 +27,7 @@ int main() {
 		switch (myChoice)
 		{
 		case 1:
-			myLogin.createAccount(userLoggedOn.myPressions);
+			myLogin.createAccount(userLoggedOn.myPressions, false);
 			break;
 		case 2:
 			userLoggedOn.createFolder();
