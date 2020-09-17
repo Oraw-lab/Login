@@ -2,12 +2,13 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include "Encryption.h"
 #include "AccountObjects.h"
 #include "NormalAccount.h"
 using namespace std;
 
 
-class Login{
+class Login : Encryption{
 	// accountFile - all passwords and user names
 	string accountFile{};
 	// map for authenticate
@@ -24,11 +25,11 @@ public:
 
 private:
 	// not implement yet
-	int stringToHexa(string accountDetial);
+	int stringToHexa(string accountDetails);
 	// loading map
 	void loadAccounts();
 	// getting account
-	void gettingDetails(unsigned int& index, const string line, string& details);
+	void gettingDetails(unsigned int& index, const string line, string& details, bool endOfLine);
 	// getting premissions
 	virtual accountType gettingAccountType(const int type);
 };

@@ -36,9 +36,10 @@ void Login::loadAccounts() {
 				// if line == space we done getting user name
 				if (line[i] == ' ') {
 					// calling getting details to get password
-					gettingDetails(i, line, password);
+					gettingDetails(i, line, tempPremissions,false);
 					// calling getting details to get premissions of user
-					gettingDetails(i, line, tempPremissions);
+					gettingDetails(i, line, password,true);
+					password = decryptString(password);
 					try {
 						// calling gettingAccountType to get premissions, converting from string to int since gettingAccountType expects int.
 						premissions = gettingAccountType(stoi(tempPremissions));
@@ -46,6 +47,7 @@ void Login::loadAccounts() {
 					catch (int) {
 						// catching int type from gettingAccountType = unknown premissions
 						cout << "unknown account type" << endl;
+						premissions = accountType::normalUser;
 					}
 					// breaking to not add line[i] to account again.
 					break;
@@ -80,11 +82,11 @@ arugs = int index = getting char postion at current line , string line = getting
 design = getting password / premissions  
 return = None , chaning variable by value.
 */
-void Login::gettingDetails(unsigned int &index, const string line, string &details) {
+void Login::gettingDetails(unsigned int &index, const string line, string &details, bool endOfLine) {
 	// starting to go over the line at index + 1 
 	for (unsigned int j = index + 1; j < line.size(); j++) {
 		// if char is space we finished getting password / premissions
-		if (line[j] == ' ') {
+		if (line[j] == ' ' && !endOfLine) {
 			// index = to j to not go over the same chars
 			index = j;
 			// returning
@@ -147,7 +149,7 @@ int Login::logon(account accountTry)
 			if (exists.first == accountTry.accountPassword) {
 				// User able to login , setting logpass to true
 				loginPass = true;
-				cout << "You were able to login";
+				cout << "You were able to login" << endl;
 				// returning 0 if account admin
 				if (exists.second == accountType::administrator) {
 					return 0;
@@ -204,7 +206,8 @@ void Login::createAccount(accountType account, bool firstTime) {
 		cin >> premissions;
 	}
 	// formatting the string to fit for file
-	string toAppend = "\n" + accountName + " " + accountPassword + " " + premissions;
+	accountPassword = encrypt(accountPassword);
+	string toAppend = "\n" + accountName + " " + premissions + " " + accountPassword;
 	// writing to file
 	ofstream outfile;
 	outfile.open(accountFile, ios_base::app);
@@ -216,7 +219,7 @@ void Login::createAccount(accountType account, bool firstTime) {
 }
 
 
-int Login::stringToHexa(string accountDetial)
+int Login::stringToHexa(string accountDe)
 {
 	return 0;
 }

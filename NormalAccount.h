@@ -22,6 +22,7 @@ public:
 	design - create object NormalAccount.
 	*/
 	NormalAccount(int premissions, string _malwarePath, string _usersFolder) : Malware(_malwarePath){
+		usersFolder = _usersFolder;
 		if (checkDir()) {
 			if (_mkdir(_usersFolder.c_str()) == -1) {
 				cout << "Error creating Dir" << endl;

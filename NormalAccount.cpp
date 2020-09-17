@@ -29,11 +29,11 @@ int NormalAccount::checkDir()
 {
 	struct stat info;
 	if (stat(usersFolder.c_str(), &info) != 0)
-		return 0;
-	else if (info.st_mode & S_IFDIR)
 		return 1;
-	else
+	else if (info.st_mode & S_IFDIR)
 		return 0;
+	else
+		return 1;
 }
 /*
 arugs = void
@@ -58,10 +58,10 @@ void NormalAccount::createFile() {
 		return;
 	}
 	// If we pass malware func we create a file with text
-	// closing file
 	ofstream outfile(fileName);
 	outfile << accountTypeToString(myPressions)<< endl;
 	outfile << text << endl;
+	// closing file
 	outfile.close();
 }
 
