@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 	Config myConfig = Config();
-	Login myLogin = Login(myConfig.accountFile);
+	Login myLogin = Login(myConfig.mySQL);
 	account myAccount{};
 	cout << " What is the username ? ";
 	cin >> myAccount.accountName;

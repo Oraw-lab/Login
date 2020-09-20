@@ -145,6 +145,8 @@
     <ClInclude Include="login.h" />
     <ClInclude Include="Malwares.h" />
     <ClInclude Include="NormalAccount.h" />
+    <ClInclude Include="SQLconnection.h" />
+    <ClInclude Include="sqlite3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
@@ -153,6 +155,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Malwares.cpp" />
     <ClCompile Include="NormalAccount.cpp" />
+    <ClCompile Include="SQLconnection.cpp" />
+    <ClCompile Include="sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Login.rc" />

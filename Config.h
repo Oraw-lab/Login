@@ -7,9 +7,9 @@ using namespace std;
 class Config {
 public:
 	// Files for program
-	string accountFile;
 	string malwareFileString;
 	string placedFiles;
+	string mySQL;
 	Config();
 	// getting files paths
 	string createAccountFile(int type);

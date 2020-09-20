@@ -3,99 +3,12 @@
 #include <iostream>
 #include <sstream>
 using namespace std;
-/*
-arugs = string _accountFile = file should contain username password with format of "username password premissions"
-design = creating a map full of username and passowrd
-return = None 
-*/
-Login::Login(string _accountFile) {
-	accountFile = _accountFile;
-	// calling loadAccount to init the map
-	loadAccounts();
-}
-/*
-arugs = None - using accountFile variable of current object .
-design = loading map 
-return = None
-*/
+
 void Login::loadAccounts() {
-	// creating fstrean object
-	fstream newFile;
-	// opening current file
-	newFile.open(accountFile, ios::in);
-	// checking if file is open
-	if (newFile.is_open()) {
-		// init strings
-		string line, account, password, tempPremissions;
-		// creating accountType
-		accountType premissions = accountType::notDef;
-		// start to go over each line
-		while (getline(newFile, line)) {
-			// going over each char in line
-			for (unsigned int i = 0; i < line.size(); i++) {
-				// if line == space we done getting user name
-				if (line[i] == ' ') {
-					// calling getting details to get password
-					gettingDetails(i, line, tempPremissions,false);
-					// calling getting details to get premissions of user
-					gettingDetails(i, line, password,true);
-					password = decryptString(password);
-					try {
-						// calling gettingAccountType to get premissions, converting from string to int since gettingAccountType expects int.
-						premissions = gettingAccountType(stoi(tempPremissions));
-					}
-					catch (int) {
-						// catching int type from gettingAccountType = unknown premissions
-						cout << "unknown account type" << endl;
-						premissions = accountType::normalUser;
-					}
-					// breaking to not add line[i] to account again.
-					break;
-				}
-				// adding the char to account
-				account += line[i];
-			}
-			// inserting to allAccount (hash map) syntax of map is string, pair(string,accountType)
-			// creating a pair and inserting
-			allAccount.insert({ account , make_pair(password,premissions) });
-			// initalizing all variable to NULL
-			account = {}, password = {}, tempPremissions = {};
-			premissions = accountType::notDef;
-		}
-
+	for (int i = 0; i < accountV.size(); i++) {
+		string encryptedPass = encrypt(password.at(i));
+		allAccount.insert({ accountV.at(i),make_pair(encryptedPass,gettingAccountType(premissions.at(i))) });
 	}
-	// we didnt find a file in path, creating new file
-	else {
-		// creating file
-		ofstream outfile(accountFile);
-		cout << " No init account " << endl;
-		cout << " Please create a new account" << endl;
-		// creating adminsitrator account
-		createAccount(accountType::administrator, true);
-		// loading map with new account 
-		loadAccounts();
-	}
-
-}
-/*
-arugs = int index = getting char postion at current line , string line = getting whole line on where we stand , details = we change details accorrdinly - based on text.
-design = getting password / premissions  
-return = None , chaning variable by value.
-*/
-void Login::gettingDetails(unsigned int &index, const string line, string &details, bool endOfLine) {
-	// starting to go over the line at index + 1 
-	for (unsigned int j = index + 1; j < line.size(); j++) {
-		// if char is space we finished getting password / premissions
-		if (line[j] == ' ' && !endOfLine) {
-			// index = to j to not go over the same chars
-			index = j;
-			// returning
-			return;
-		}
-		// if we didnt get to if statment we add the char ti details
-		details += line[j];
-	}
-
 }
 /*
 arugs = const int type = account type
@@ -146,7 +59,7 @@ int Login::logon(account accountTry)
 		// exists.first is not NULL
 		if (exists.first != "") {
 			// checking if the password is equal
-			if (exists.first == accountTry.accountPassword) {
+			if (exists.first == decryptString(accountTry.accountPassword)) {
 				// User able to login , setting logpass to true
 				loginPass = true;
 				cout << "You were able to login" << endl;
@@ -208,18 +121,10 @@ void Login::createAccount(accountType account, bool firstTime) {
 	// formatting the string to fit for file
 	accountPassword = encrypt(accountPassword);
 	string toAppend = "\n" + accountName + " " + premissions + " " + accountPassword;
-	// writing to file
-	ofstream outfile;
-	outfile.open(accountFile, ios_base::app);
-	outfile << toAppend;
+	string sqlSyn("INSERT INTO ACCOUNT VALUES('" + accountName + "'," + premissions +",'"+ accountPassword + "'" + ");");
+	InsertItem(sqlSyn);
 	// converting to accountype and inserting to hash map
 	accountType myPremssions = gettingAccountType(stoi(premissions));
 	allAccount.insert({ accountName,make_pair(accountPassword,myPremssions) });
 
-}
-
-
-int Login::stringToHexa(string accountDe)
-{
-	return 0;
 }

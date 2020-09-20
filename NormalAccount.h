@@ -11,7 +11,6 @@ public:
 	// all files and folders will be placed here
 	string usersFolder;
 	// extra action if user is admin
-	bool isAdmin = false;
 	accountType myPressions;
 	// funcation creates file
 	void createFile();
@@ -29,16 +28,12 @@ public:
 				exit(EXIT_FAILURE);
 			}
 		}
-		if (premissions) {
-			// Account is admin
-			isAdmin = true;
+		if (premissions == 0) 
+			// Account is admin1
 			myPressions = accountType::administrator;
-		}
-		else {
+		else
 			// Account is not admin
-			isAdmin = false;
 			myPressions = accountType::normalUser;
-		}
 	}
 private:
 	// converts accountype to string

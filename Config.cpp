@@ -22,10 +22,6 @@ string Config::createAccountFile(int type) {
 	// returning the right variable based on type
 	switch (type)
 	{
-	case 0:
-		// Account file
-		return fileToChange += "\\Accounts.txt";
-		break;
 	case 1:
 		// Malware file
 		return fileToChange += "\\Malwares.txt";
@@ -34,8 +30,10 @@ string Config::createAccountFile(int type) {
 		// Users space
 		return fileToChange += "\\UserFolder";
 		break;
+	case 3:
+		return fileToChange += "\\Account.DB";
 	default:
-		break;
+		throw(type);
 	}
 }
 
@@ -55,7 +53,7 @@ string Config::formatChars(wchar_t toFormat[MAX_PATH]){
 
 Config::Config() {
 	// initalizing all variable object
-	accountFile = createAccountFile(0);
 	malwareFileString = createAccountFile(1);
 	placedFiles = createAccountFile(2);
+	mySQL = createAccountFile(3);
 }
